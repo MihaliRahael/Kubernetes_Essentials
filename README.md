@@ -37,9 +37,9 @@ What problems does Kubernetes solve? What are the tasks of an orchestration tool
 
 ## Kubernetes basic architecture
 
-![Kubernetes architecture](media/3408ae706d51c49f86321dc205b7cec5.png)
+![image](https://user-images.githubusercontent.com/106816732/213409273-d2e40be3-0fc0-4ff1-a09d-f7261bee5584.png)
 
-![](media/bea22a899f4b1a98a74b4779656ee2bb.png)
+![image](https://user-images.githubusercontent.com/106816732/213409297-b1c21ecd-cbdf-4f71-af01-28eb8f83d7b5.png)
 
 The Kubernetes cluster is made up with at least one master node and connected with few worker nodes. Each node has Kubelet process running on it. Kubelet is a Kubernetes process that makes it possible for the cluster to talk to each other and executes some tasks on those nodes like running application processes.
 
@@ -47,7 +47,7 @@ Each worker node has docker containers of different applications deployed on it.
 
 So the question is what is running on master node? Master node actually runs several Kubernetes processes that are absolutely necessary to run and manage the cluster properly.
 
-![](media/99ecf030581903aade4a368b5ba658a5.png)
+![image](https://user-images.githubusercontent.com/106816732/213409337-e215b169-dc1f-4c73-b059-7c5ec82e0302.png)
 
 One of such processes is an API server which also is a container. An API server is actually the entry point to the kubernetes cluster. So this is the process which the different Kubernetes clients will talk to. Like UI, if you're using kubernetes dashboard, an API, if you're using some scripts and automating technologies and a CLI. So all of these will talk to the API server.
 
@@ -67,7 +67,7 @@ One thing to be noted here is that worker nodes actually have most load because 
 
 ## Kubernetes basic concepts (pods and containers)
 
-![](media/780da7d921594a13243aa644aeb0a98e.png)
+![image](https://user-images.githubusercontent.com/106816732/213409382-538fc03c-1ea0-41f1-befb-9ac191b0d72c.png)
 
 In Kubernetes pod is the smallest unit a kubernetes user will configure and interact with. Pod is basically a wrapper of a container and on each worker node there will be multiple pods and inside of a pod there might have multiple containers. Usually for one application there would have one pod. The only time multiple containers occur inside of a pod is when there is a main application that needs some helper containers. Example; a database would be one pod. a message broker will be another pod, a server will be again another pod. Node js application or a java application will be its own pod.
 
@@ -81,7 +81,7 @@ Whenever we launch a pod, it will go to the ‘pending’ stage or the creation 
 
 All the configurations in kubernetes cluster actually goes through a master node with the process called API server. So kubernetes clients which could be a UI, a Kubernetes dashboard for example or an API which could be a script or curl command or a command line tool like KubeCTL, they all talk to the API server and they send their configuration requests to the API server which is the main entry point or the only entry point into the cluster. The requests have to be either in YAML or JSON format. An example configuration in the YAML format actually looks like
 
-![](media/5e13b316221e660919dad6e5c64756ef.png)
+![image](https://user-images.githubusercontent.com/106816732/213409431-815b6420-9c91-4260-b6de-850ad96a1bd2.png)
 
 This is a request to Kubernetes to configure a component called deployment which is basically a template or a blueprint for creating pods and in this specific configuration example we tell kubernetes to create two replica pods called my app with each pod replica having a container based on my-image running inside. In addition to that we configure what the environment variables and the port configuration of this container inside the pod should be.
 
@@ -113,7 +113,7 @@ Note that Kubectl will also be installed automatically. Commands to check whther
 -   Kubectl
 -   kubectl get nodes
 
-![](media/11f4749104f4985fc09072be96806e2b.png)
+![image](https://user-images.githubusercontent.com/106816732/213409504-896882c3-971c-45b6-b8cc-71cf692c85af.png)
 
 **2- Minikube setup**
 
@@ -121,13 +121,13 @@ Note that Kubectl will also be installed automatically. Commands to check whther
 
 ## Deployment and statefulSet
 
-![](media/86961ad20cf7db052d97895639b1a17c.png)
+![image](https://user-images.githubusercontent.com/106816732/213409992-839e16be-b572-4e6c-9316-e5638ecd13cc.png)
 
 Say we have our ML model or web app and we need to deploy into KB cluster. We can do that using KB deployment. We write deployment.yaml file, which contains all the configurations to deploy onto KB cluster.
 
 We have two types of applications : stateless and stateful. Applications which wont store any kind of data are known as stateless and viceversa. So stateful applications requires some amount of storages like KB volumes. In default it is a stateless application, once we link some kind of volumes to it, it becomes stateful.
 
-![](media/d1d3f9504e8cbdd0046b20c15a8ae0b5.png)
+![image](https://user-images.githubusercontent.com/106816732/213410034-758c62bc-fe67-4530-9ecf-0978eb1ce516.png)
 
 **Stateful and Stateless App**
 
@@ -145,11 +145,11 @@ Important property of namespaces is that every namespaces are isolated. Whenever
 
 Whenever we create a new pod, or any kind of object like deployment or services or config map and secrets, this will default goes to the ‘default’ namespace. The following commands shows namespaces and create a new namespace.
 
-![](media/b8268fc5ef710735c1a54c9862f4fab3.png)
+![image](https://user-images.githubusercontent.com/106816732/213410151-5f0cf57e-32ad-417f-8d74-1aa97a5b7ea0.png)
 
 The following command will create an nginx pod by taking the nginx image from docker hub and put it into inside ritesh namespace. If we don’t give ‘-n ritesh’, the object will go to default namespace.
 
-![](media/ca7924a27ecc20a6e8f9e63ea84f8410.png)
+![image](https://user-images.githubusercontent.com/106816732/213410200-a5b4bf40-b26a-4d52-99f6-acd1a7d73612.png)
 
 If we don’t give -n \<namespace name\>, command will get pods in default namespace.
 
@@ -171,11 +171,11 @@ Commands :
 -   kubectl get pod \<pod name\> -o yaml \> filename.yaml [get the describe output in a yaml file]
 -   kubectl run nginx1 –image=nginx –dry-run=client -o yaml \> filename.yaml [indicates don’t apply the actual configuration, first show the yaml file, then I will manually apply the configurations.]
 
-![](media/bd93cc344425a874e1355df560371655.png)
+![image](https://user-images.githubusercontent.com/106816732/213410258-1671c6dc-dc17-41d7-b5ac-146642dba098.png)
 
 We can see no pod named nginx1 has created. Now open the yaml file created, make the necessary changes made.
 
-![](media/94022148398aa9f89ecf99aa8f1c7f5e.png)
+![image](https://user-images.githubusercontent.com/106816732/213410286-b8d67718-3323-4d59-9d60-e31a59f91525.png)
 
 -   kubectl apply -f \<filename.yaml\> [applying the configuration define dinside filename.yaml to KB cluster]
 
@@ -183,11 +183,11 @@ We can see no pod named nginx1 has created. Now open the yaml file created, make
 
 Configmaps, secrets and volumes are the ways to store information inside KB cluster.
 
-**![](media/08d69cea201f0f0ff577ac000386089e.png)**
+![image](https://user-images.githubusercontent.com/106816732/213410405-ee09292e-e5ec-42cd-9589-55853f24d38a.png)
 
 **![](media/e5775764b47a22302c3a44c99bbbd4f7.png)**
 
-**![](media/f3f35e1fcea2914b3ff1eb0d3a64c35a.png)**
+![image](https://user-images.githubusercontent.com/106816732/213410453-472db75c-ac0f-4305-b78c-ccb95d5f128b.png)
 
 [**https://kubernetes.io/docs/concepts/storage/persistent-volumes/**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 
@@ -197,8 +197,7 @@ Suppose we have a KB cluster which contains a front end application, back end mo
 
 Configmap is a separate KB object or a component. We will launch configmap similar to the pod and will mention credentials inside it. There are 3 methods to create configmap. Using --from-literal , --from-file and yaml file.
 
-![](media/e671ecbc72f168a4ad94d9f1e5a0dbe8.png)
-
+![image](https://user-images.githubusercontent.com/106816732/213410518-38644555-72ca-4872-939b-29f306d18e67.png)
 Commands :
 
 -   kubectl get configmap [lists all configmaps. Note that kube-root-ca is default file]
@@ -207,7 +206,7 @@ Commands :
 
     method 1
 
-    ![](media/a8c3dbcfbc0f321aa58340c51137fb1e.png)
+![image](https://user-images.githubusercontent.com/106816732/213410554-8f1b612e-9c8a-475e-94c9-c31b10e74a4f.png)
 
     Method 2
 
@@ -217,7 +216,7 @@ Commands :
 
     Method 3 -YAML file (declarative approach. Above 2 are imperative approaches)
 
-    ![](media/3748b75e93bfbf0ffbe2d4c27e43bc80.png)
+   ![image](https://user-images.githubusercontent.com/106816732/213410596-47033737-040b-493e-b67a-afdbb0a0560c.png)
 
 -   kubectl apply -f filename.yaml
 -   kubectl describe configmap \<name\>
@@ -231,7 +230,7 @@ In configmaps we store data in the format of key value pair. The data should be 
 -   Kubectl describe secret hello
 -   Kubestl get secret hello -o jsonpath=’{}’
 
-![](media/96ba4c36c20a2aa371818a2d89e0421e.png)
+![image](https://user-images.githubusercontent.com/106816732/213410647-47add740-01ce-4f6c-bfcc-09587092da8a.png)
 
 We can see that data is encrypted and we can unfold it using the command shown in screenshot. We can also create secrets after --file-file
 
@@ -245,7 +244,7 @@ How do we maintain the desired state of a pod?
 
 The following code snippet is taken from Kubernetes documentation for ReplicaSet itself. Copy the code and create new yaml file in our project directory. Note the replica, container and image settings in the code.
 
-![](media/98db221df25083150f04c57bdf47b665.png)
+![image](https://user-images.githubusercontent.com/106816732/213410785-c5a7c7a9-4c55-4778-951d-7e01fdcc9774.png)
 
 Once the yaml is ready, apply the configuration using the command kubectl apply -f .\\replicaset.yaml Check the replica sets using kubectl get rs
 
@@ -263,15 +262,15 @@ This scheduling of pods takes place through resource request. First of all the k
 
 What if we want to forcefully schedule a pod with specific configuration to node 1, not 2 or 3? We can create taint for this node 1 and toleration for this pod and we can match them and we can easily schedule them. **This is the main intention of using taints and tolerations ie to assign a particular pod to a node.**
 
-![](media/9445910ea31a77295ed52e7e5fefd3d4.png)
+![image](https://user-images.githubusercontent.com/106816732/213410868-c51759c0-39f7-4221-8f0d-282ee9165e35.png)
 
 **Practical**
 
-**![](media/c4830ba07fc096d224d16ad96b92d557.png)**
+![image](https://user-images.githubusercontent.com/106816732/213410905-8a62ae27-3ae6-43bf-84ba-c60c62d97fc6.png)
 
 Now node has tainted. Go to VS code for creating tolerance for pod.
 
-**![](media/adb54213567e10e2cbcd422c74ddd8aa.png)**
+![image](https://user-images.githubusercontent.com/106816732/213410935-32f6e1a3-74c7-4f63-92c5-2a9eb402f6f0.png)
 
 Now apply the yaml. And check details using kubectl describe \<pod name\>
 
@@ -292,13 +291,13 @@ How to create a node selector?
 
 Label a particular node : kubectl label nodes \<node-name\> \<label-key\>=\<label-value\>
 
-![](media/6aa6ba09c390caf7c41a7ed60435164d.png)
+![image](https://user-images.githubusercontent.com/106816732/213411021-0f7004d4-5229-4223-b99a-002622bb3615.png)
 
 In the above screenshot, there is only one node which is docker-desktop. Then we label that node by giving a key value pair hello=world.
 
 Once the node is labelled, we can create a pod specification yaml file, inside which we can pass the label known as node selector. Go to VS code and create a new folder for node selector under the project and create the yaml file. The code here is copied from KB documentation and edited for our requirements. Note the nodeselector option and taint option.
 
-![](media/d819f337d43b86b35a3dfe284ed4544f.png)
+![image](https://user-images.githubusercontent.com/106816732/213411093-e2193a30-954c-436b-a245-769ffa528299.png)
 
 Once the yaml is ready apply it.
 
@@ -314,11 +313,11 @@ Suppose I have Jenkins to deploy something into KB and Prometheus tool for scrap
 
 Whenever a pod get created, a default service account will be created.
 
-![](media/e651dbda1d2308fd62701ee7729d989c.png)
+![image](https://user-images.githubusercontent.com/106816732/213411136-1c2fe8ae-4d3e-49bd-9bfa-6ff315ab91b4.png)
 
 Note the token of service account. It is encrypted using a secret. We can see this token in secrets as well using the command ‘kubectl get secrets’ . We can use this token as a bearer token to make a particular authentication between the services. Lets say id I have attach this particular token inside Jenkin, so that I can easily publish the objects to the KB cluster or easily deploy some objects using Jenkins automation server.
 
-![](media/7692bcfad3cdb64f6082ccecd4eeb943.png)
+![Uploading image.png…]()
 
 The above screenshot shows the token. Attach this token in a particular curl request. Lets say I want to create a pod using Jenkins. Attach the above token to the Jenkins dashboard, then I can easily perform a shell command of kubectl run pod.
 

@@ -142,7 +142,10 @@ Since the above three namespaces are default, we can create our own customised n
 Important property of namespaces is that every namespaces are isolated. Whenever we access a pod inside the cluster we need to mention the namespace like kubectl get pod -ns \<namespace name\>
 
 There are many usecases for Kubernetes namespaces, including:
-- 
+* Allowing teams or projects to exist in thier own virtual clusters without fear of impacting each others work
+* Enhancing role based access controls (RBAC) by limiting users and proccesses to certain namespaces
+* Enabling the dividing of a clusters resources between multiple teams and users via resource quotas
+* Providing ans easy method of separating development, testing and deployment of containerized applications enabling the entire lifecycle to takepalce on the same cluster
 
 Whenever we create a new pod, or any kind of object like deployment or services or config map and secrets, this will default goes to the ‘default’ namespace. The following commands shows namespaces and create a new namespace.
 
